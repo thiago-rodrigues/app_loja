@@ -1,6 +1,6 @@
-@(message : String)
+@import models.Produto
+@(produto : List[Produto])
 
 @main("Loja"){
-    @message
-
+     @produto.nome
 }
