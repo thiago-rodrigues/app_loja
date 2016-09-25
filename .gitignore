@@ -9,3 +9,5 @@ target
 /RUNNING_PID
 .sbtserver/
 .sbtserver/connections/
+project/.sbtserver
+*.log
