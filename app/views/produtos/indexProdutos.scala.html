@@ -1,6 +1,13 @@
 @import models.Produto
-@(produto : List[Produto])
+@(produtos: List[Produto])
 
 @main("Loja"){
-     @produto.nome
+     @if(!produtos.isEmpty){
+
+          @for(produto <- produtos){
+               @produto.nome
+          }
+     } else {
+          nenhum registro
+     }
 }
