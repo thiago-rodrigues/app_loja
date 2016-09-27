@@ -1,13 +1,44 @@
 @import models.Produto
 @(produtos: List[Produto])
 
-@main("Loja"){
-     @if(!produtos.isEmpty){
+@main("Produtos"){
 
-          @for(produto <- produtos){
-               @produto.nome
-          }
-     } else {
-          nenhum registro
-     }
+
+    <form class="form-inline" action="@routes.ProdutoController.addProduto" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Nome Produto" name="nome">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Valor" name="valor">
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar</button>
+    </form>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+
+     <table class="table table-bordered table-striped">
+         <thead>
+             <tr>
+                 <th>Nome</th>
+                 <th>Valor</th>
+                 <th>Ações</th>
+             </tr>
+         </thead>
+              @if(!produtos.isEmpty){
+                   @for(produto <- produtos){
+              <tr>
+                   <td>@produto.nome</td>
+                   <td>@produto.valor</td>
+                   <td>
+                      <button class="btn btn-primary">Editar</button>
+                      <button class="btn btn-danger">Excluir</button>
+                   </td>
+              </tr>
+                   }
+              }
+     </table>
 }
+,
