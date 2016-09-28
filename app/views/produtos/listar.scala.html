@@ -1,0 +1,53 @@
+@import models.Produto
+@(produtos: List[Produto])
+
+@main("Produtos"){
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">Produto</a>
+                <a href="@routes.ProdutoController.novo" class="list-group-item">Novo</a>
+            </div>
+        </nav>
+        <div class="col-md-10">
+            <div id="lista-p" class="panel panel-primary">
+                <div class="panel-heading">Lista de Produtos</div>
+                <div id="lista-b" class="panel-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                        </thead>
+                        @if(!produtos.isEmpty){
+                        @for(produto <- produtos){
+                        <tr>
+                            <td>@produto.nome</td>
+                            <td>@produto.valor</td>
+                            <td width="160">
+                                <a href="@routes.ProdutoController.editar(produto.id)">
+                                    <button type="submit" class="btn btn-primary">Editar</button>
+                                </a>
+                                <a href="@routes.ProdutoController.deletar(produto.id)">
+                                    <button class="btn btn-danger">Excluir</button>
+                                </a>
+                            </td>
+                        </tr>
+                        }
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+}
