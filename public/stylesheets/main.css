@@ -1,0 +1,12 @@
+.navbar{
+    background: #f2f2f2;
+}
+.table-striped>tbody>tr:nth-of-type(odd){
+    background-color: #f2f2f2
+}
+#lista-p.panel-primary{
+    border-color: transparent;
+}
+#lista-b.panel-body{
+    padding: 0px;
+}

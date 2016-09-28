@@ -16,15 +16,13 @@
                     <button type="button" class="navbar-toggle"
                         data-toggle="collapse" data-target=".navbar-collapse">
                     </button>
-                    <a class="navbar-brand" href="@routes.HomeController.index">Home</a>
-
+                    <a class="navbar-brand" href="@routes.HomeController.index()">Home</a>
                     <button type="button" class="navbar-toggle"
                         data-toggle="collapse" data-target=".navbar-collapse">
                     </button>
-                    <a class="navbar-brand" href="@routes.ProdutoController.index">Produtos</a>
+                    <a class="navbar-brand" href="@routes.ProdutoController.listar()">Produtos</a>
                 </div>
             </nav>
-
             @content
         </body>
 </html>
