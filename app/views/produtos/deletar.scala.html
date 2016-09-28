@@ -1,6 +1,5 @@
-@(title: String)
-
-@main(title){
+@(produto: Produto)
+@main("Produto"){
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2">
@@ -12,16 +11,19 @@
         </nav>
         <div class="col-md-10">
             <div class="panel panel-danger">
-                <div class="panel-heading">@title</div>
+                <div class="panel-heading">Tem certeza que deseja excluir o produto?</div>
                 <div class="panel-body">
-                    <form class="form-inline" action="@routes.ProdutoController.deletar()" method="post">
+                    <form class="form-inline" action="@routes.ProdutoController.deletar(produto.id)" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Nome Produto" name="nome" required="required" >
+                            <input type="text" class="form-control" placeholder="Código" name="id" required="required" value="@produto.id" readonly >
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Valor" name="valor" required="required" maxlength="15">
+                            <input type="text" class="form-control" placeholder="Nome Produto" name="nome" required="required" value="@produto.nome" readonly>
                         </div>
-                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Valor" name="valor" required="required" maxlength="15" value="@produto.valor" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Sim</button>
                     </form>
                 </div>
                 <div class="panel-footer"></div>
