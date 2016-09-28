@@ -3,7 +3,9 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+
+GET     /                           controllers.LoginController.login()
+GET     /home                       controllers.HomeController.index()
 GET     /produtos                   controllers.ProdutoController.listar()
 POST    /produtos/add               controllers.ProdutoController.adicionar()
 GET     /produtos/new               controllers.ProdutoController.novo()
