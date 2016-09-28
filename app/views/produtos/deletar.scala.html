@@ -1,0 +1,32 @@
+@(title: String)
+
+@main(title){
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">Ações</a>
+                <a href="@routes.ProdutoController.novo" class="list-group-item">Novo</a>
+                <a href="@routes.ProdutoController.listar" class="list-group-item">Lista de Produtos</a>
+            </div>
+        </nav>
+        <div class="col-md-10">
+            <div class="panel panel-danger">
+                <div class="panel-heading">@title</div>
+                <div class="panel-body">
+                    <form class="form-inline" action="@routes.ProdutoController.deletar()" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Nome Produto" name="nome" required="required" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Valor" name="valor" required="required" maxlength="15">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                    </form>
+                </div>
+                <div class="panel-footer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+}
