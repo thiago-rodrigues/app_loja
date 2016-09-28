@@ -49,6 +49,17 @@ public class ProdutoController extends Controller {
         produto.update();
         return redirect(routes.ProdutoController.listar());
     }
+    public Result deletar(Long id){
+        Produto.find.ref(id).delete();
+        return redirect(routes.ProdutoController.listar());
+    }
+
+    public Result formDeletar(Long id){
+        Produto produto = Produto.find.byId(id);
+        return ok(deletar.render(produto));
+    }
+
+
 }
 
 
