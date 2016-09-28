@@ -6,7 +6,7 @@ import views.html.*;
 public class HomeController extends Controller {
 
     public Result index() {
-        return ok(index.render("Your new application is ready."));
+        return ok(index.render("Pagina Inicial!!"));
     }
 
 }
