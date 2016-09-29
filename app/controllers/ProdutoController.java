@@ -1,4 +1,5 @@
 package controllers;
+import com.avaje.ebean.Ebean;
 import models.Produto;
 import play.data.DynamicForm;
 import play.data.FormFactory;
@@ -19,44 +20,81 @@ public class ProdutoController extends Controller {
     FormFactory formFactory;
 
     public Result listar() {
-        List<Produto> produtos_list = Produto.find.orderBy("id desc").findList();
-        return ok(listar.render(produtos_list));
+        Ebean.beginTransaction();
+        try {
+            List<Produto> produtos_list = Produto.find.orderBy("id desc").findList();
+            Ebean.commitTransaction();
+            return ok(listar.render(produtos_list));
+        }finally {
+            Ebean.rollbackTransaction();
+        }
     }
 
     public Result adicionar(){
-        DynamicForm form = formFactory.form().bindFromRequest();
-        Produto produto = new Produto();
-        produto.nome = form.get("nome");
-        produto.valor = new BigDecimal(form.get("valor"));
-        produto.save();
-        return redirect(routes.ProdutoController.listar());
+        Ebean.beginTransaction();
+        try{
+            DynamicForm form = formFactory.form().bindFromRequest();
+            Produto produto = new Produto();
+            produto.nome = form.get("nome");
+            produto.valor = new BigDecimal(form.get("valor"));
+            produto.save();
+            Ebean.commitTransaction();
+            return redirect(routes.ProdutoController.listar());
+        }finally {
+            Ebean.rollbackTransaction();
+        }
     }
     public Result novo(){
         return ok(novo.render("Cadastro Produto"));
     }
 
     public Result editar(Long id){
-        Produto produto = Produto.find.byId(id);
-        return ok(editar.render(produto));
+        Ebean.beginTransaction();
+        try {
+            Produto produto = Produto.find.byId(id);
+            Ebean.commitTransaction();
+            return ok(editar.render(produto));
+        }finally {
+            Ebean.rollbackTransaction();
+        }
     }
 
     public Result atualizar(Long id){
-        DynamicForm form = formFactory.form().bindFromRequest();
-        Produto produto = new Produto();
-        produto.id = new Long(form.get("id"));
-        produto.nome = form.get("nome");
-        produto.valor = new BigDecimal(form.get("valor"));
-        produto.update();
-        return redirect(routes.ProdutoController.listar());
+        Ebean.beginTransaction();
+        try {
+            DynamicForm form = formFactory.form().bindFromRequest();
+            Produto produto = new Produto();
+            produto.id = new Long(form.get("id"));
+            produto.nome = form.get("nome");
+            produto.valor = new BigDecimal(form.get("valor"));
+            produto.update();
+            Ebean.commitTransaction();
+            return redirect(routes.ProdutoController.listar());
+        }finally {
+            Ebean.rollbackTransaction();
+        }
     }
     public Result deletar(Long id){
-        Produto.find.ref(id).delete();
-        return redirect(routes.ProdutoController.listar());
+        Ebean.beginTransaction();
+        try {
+            Produto.find.ref(id).delete();
+            Ebean.commitTransaction();
+            return redirect(routes.ProdutoController.listar());
+        }finally {
+            Ebean.rollbackTransaction();
+        }
     }
 
     public Result formDeletar(Long id){
-        Produto produto = Produto.find.byId(id);
-        return ok(deletar.render(produto));
+        Ebean.beginTransaction();
+        try {
+            Produto produto = Produto.find.byId(id);
+            Ebean.commitTransaction();
+            return ok(deletar.render(produto));
+        }finally {
+            Ebean.rollbackTransaction();
+        }
+
     }
 
 
