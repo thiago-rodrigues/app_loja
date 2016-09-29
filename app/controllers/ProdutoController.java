@@ -1,5 +1,4 @@
 package controllers;
-import com.avaje.ebean.Ebean;
 import models.Produto;
 import play.data.DynamicForm;
 import play.data.FormFactory;
@@ -8,10 +7,8 @@ import views.html.produtos.deletar;
 import views.html.produtos.editar;
 import views.html.produtos.listar;
 import views.html.produtos.novo;
-
 import javax.inject.Inject;
 import java.math.BigDecimal;
-import java.security.PublicKey;
 import java.util.List;
 
 import static com.avaje.ebean.Ebean.*;
