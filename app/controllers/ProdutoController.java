@@ -14,53 +14,66 @@ import java.math.BigDecimal;
 import java.security.PublicKey;
 import java.util.List;
 
+import static com.avaje.ebean.Ebean.*;
+
 public class ProdutoController extends Controller {
 
     @Inject
     FormFactory formFactory;
 
     public Result listar() {
-        Ebean.beginTransaction();
+        beginTransaction();
         try {
             List<Produto> produtos_list = Produto.find.orderBy("id desc").findList();
-            Ebean.commitTransaction();
+            commitTransaction();
             return ok(listar.render(produtos_list));
+        }catch(Exception e) {
+            rollbackTransaction();
+            return null;
         }finally {
-            Ebean.rollbackTransaction();
+            endTransaction();
         }
     }
 
     public Result adicionar(){
-        Ebean.beginTransaction();
+        beginTransaction();
         try{
             DynamicForm form = formFactory.form().bindFromRequest();
             Produto produto = new Produto();
             produto.nome = form.get("nome");
             produto.valor = new BigDecimal(form.get("valor"));
             produto.save();
-            Ebean.commitTransaction();
+            commitTransaction();
             return redirect(routes.ProdutoController.listar());
-        }finally {
-            Ebean.rollbackTransaction();
+        }catch(Exception e){
+            rollbackTransaction();
+            return null;
+        }
+        finally {
+            endTransaction();
         }
     }
+
     public Result novo(){
         return ok(novo.render("Cadastro Produto"));
     }
 
     public Result editar(Long id){
-        Ebean.beginTransaction();
+        beginTransaction();
         try {
             Produto produto = Produto.find.byId(id);
-            Ebean.commitTransaction();
+            commitTransaction();
             return ok(editar.render(produto));
+        }catch(Exception e) {
+            rollbackTransaction();
+            return null;
         }finally {
-            Ebean.rollbackTransaction();
+            endTransaction();
         }
     }
 
     public Result atualizar(Long id){
-        Ebean.beginTransaction();
+        beginTransaction();
         try {
             DynamicForm form = formFactory.form().bindFromRequest();
             Produto produto = new Produto();
@@ -68,33 +81,42 @@ public class ProdutoController extends Controller {
             produto.nome = form.get("nome");
             produto.valor = new BigDecimal(form.get("valor"));
             produto.update();
-            Ebean.commitTransaction();
+            commitTransaction();
             return redirect(routes.ProdutoController.listar());
+        }catch(Exception e) {
+            rollbackTransaction();
+            return null;
         }finally {
-            Ebean.rollbackTransaction();
+            endTransaction();
         }
     }
+
     public Result deletar(Long id){
-        Ebean.beginTransaction();
+        beginTransaction();
         try {
             Produto.find.ref(id).delete();
-            Ebean.commitTransaction();
+            commitTransaction();
             return redirect(routes.ProdutoController.listar());
+        }catch(Exception e) {
+            rollbackTransaction();
+            return null;
         }finally {
-            Ebean.rollbackTransaction();
+            endTransaction();
         }
     }
 
     public Result formDeletar(Long id){
-        Ebean.beginTransaction();
+        beginTransaction();
         try {
             Produto produto = Produto.find.byId(id);
-            Ebean.commitTransaction();
+            commitTransaction();
             return ok(deletar.render(produto));
+        }catch(Exception e) {
+            rollbackTransaction();
+            return null;
         }finally {
-            Ebean.rollbackTransaction();
+            endTransaction();
         }
-
     }
 
 
