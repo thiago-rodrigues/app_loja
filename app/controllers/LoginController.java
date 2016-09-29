@@ -16,7 +16,12 @@ public class LoginController extends Controller {
     FormFactory formFactory;
 
     public Result login(){
-        return ok(login.render("Login"));
+        String usuario = session("conectado");
+        if(usuario != null){
+            return redirect(routes.HomeController.index());
+        }else{
+            return ok(login.render("Login"));
+        }
     }
 
     public Result logar(){
@@ -26,10 +31,16 @@ public class LoginController extends Controller {
         login.senha  = form.get("senha");
 
         if(Usuario.validaUsuario(login.usuario,login.senha) != null){
+            session("conectado", login.usuario);
             return redirect(routes.HomeController.index());
         }else {
             return redirect(routes.LoginController.login());
         }
+    }
+
+    public Result Logout(){
+        session().clear();
+        return ok();
     }
 
 
