@@ -1,4 +1,5 @@
 package controllers;
+import models.Usuario;
 import play.mvc.*;
 import views.html.*;
 
@@ -6,7 +7,11 @@ import views.html.*;
 public class HomeController extends Controller {
 
     public Result index() {
-        return ok(index.render("Pagina Inicial!!"));
+        Usuario usuario = new Usuario();
+        if(usuario.vericaSessaoUsuario() != null) {
+            return ok(index.render("Pagina Inicial!!"));
+        }
+        return redirect(routes.LoginController.login());
     }
 
 }
