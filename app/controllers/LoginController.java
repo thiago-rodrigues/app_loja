@@ -38,9 +38,9 @@ public class LoginController extends Controller {
         }
     }
 
-    public Result Logout(){
+    public Result logout(){
         session().clear();
-        return ok();
+        return redirect(routes.LoginController.login());
     }
 
 
