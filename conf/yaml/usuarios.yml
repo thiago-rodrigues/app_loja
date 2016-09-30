@@ -1,0 +1,9 @@
+#Usuario
+
+- &1 !!models.Usuario
+  usuario: sisqualis
+  senha: sisqualis
+
+- &2 !!models.Usuario
+  usuario: thiago
+  senha: 123456

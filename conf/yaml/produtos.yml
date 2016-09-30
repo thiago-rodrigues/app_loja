@@ -1,0 +1,55 @@
+#Produto
+
+- &1 !!models.Produto
+  nome: SSD 20GB
+  valor: 80
+
+- &2 !!models.Produto
+  nome: SSD 30GB
+  valor: 90
+
+- &3 !!models.Produto
+  nome: SSD 40GB
+  valor: 100
+
+- &4 !!models.Produto
+  nome: SSD 50GB
+  valor: 120
+
+- &5 !!models.Produto
+  nome: SSD 60GB
+  valor: 130
+
+- &6 !!models.Produto
+  nome: SSD 80GB
+  valor: 140
+
+- &7 !!models.Produto
+  nome: SSD 90GB
+  valor: 150
+
+- &8 !!models.Produto
+  nome: SSD 100GB
+  valor: 200
+
+- &8 !!models.Produto
+  nome: SSD 120GB
+  valor: 210
+
+- &9 !!models.Produto
+  nome: SSD 160GB
+  valor: 220
+
+- &10 !!models.Produto
+  nome: SSD 180GB
+  valor: 250
+
+- &11 !!models.Produto
+  nome: SSD 190GB
+  valor: 260
+
+- &12 !!models.Produto
+  nome: SSD 300GB
+  valor: 280
+
+
