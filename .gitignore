@@ -12,3 +12,4 @@ target
 project/.sbtserver
 *.log
 RUNNING_PID
+/conf/evolutions
