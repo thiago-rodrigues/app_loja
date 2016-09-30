@@ -4,14 +4,13 @@ import play.mvc.*;
 import views.html.*;
 
 
-public class HomeController extends Controller {
+public class HomeController extends Auth {
 
     public Result index() {
-        Usuario usuario = new Usuario();
-        if(usuario.vericaSessaoUsuario() != null) {
-            return ok(index.render("Pagina Inicial!!"));
+        if(vericaSessaoUsuario() == null) {
+            return redirect(routes.LoginController.login());
         }
-        return redirect(routes.LoginController.login());
+        return ok(index.render("Pagina Inicial!!"));
     }
 
 }

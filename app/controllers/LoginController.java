@@ -11,17 +11,15 @@ import views.html.produtos.login.login;
 import javax.inject.Inject;
 
 
-public class LoginController extends Controller {
+public class LoginController extends Auth {
     @Inject
     FormFactory formFactory;
 
     public Result login(){
-        String usuario = session("conectado");
-        if(usuario != null){
-            return redirect(routes.HomeController.index());
-        }else{
+        if(vericaSessaoUsuario() == null){
             return ok(login.render("Login"));
         }
+        return redirect(routes.HomeController.index());
     }
 
     public Result logar(){
@@ -42,6 +40,5 @@ public class LoginController extends Controller {
         session().clear();
         return redirect(routes.LoginController.login());
     }
-
 
 }
