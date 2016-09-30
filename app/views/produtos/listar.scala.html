@@ -1,5 +1,5 @@
 @import models.Produto
-@(produtos: List[Produto])
+@(produtos: List[Produto], pagina: Int,qtdePaginas: Int)
 
 @main("Produtos"){
 
@@ -8,7 +8,7 @@
         <nav class="col-md-2">
             <div class="list-group">
                 <a href="#" class="list-group-item active">Produto</a>
-                <a href="@routes.ProdutoController.novo" class="list-group-item">Novo</a>
+                <a href="@routes.ProdutoController.novo()" class="list-group-item">Novo</a>
             </div>
         </nav>
         <div class="col-md-10">
@@ -37,10 +37,22 @@
                                 </a>
                             </td>
                         </tr>
-                        }
+                            }
                         }
                     </table>
                 </div>
+
+                <ul class="pagination pagination-sm">
+
+                    @for(cont <- 1 to qtdePaginas - 1 ){
+                        @if(pagina == cont){
+                            <li class="active"><a href="@routes.ProdutoController.listar(cont)">@cont</a></li>
+                        }else{
+                            <li><a href="@routes.ProdutoController.listar(cont)">@cont</a></li>
+                        }
+                    }
+                </ul>
+
             </div>
         </div>
     </div>
